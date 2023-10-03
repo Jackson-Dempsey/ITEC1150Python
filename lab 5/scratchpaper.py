@@ -1,9 +1,11 @@
+"""docstring JACKSON DEMPSEY 10/3, redesign of the "loop 2" program, a number counter, using MIPO design (main, input, processing, outputs) """
+
 def main():
 
     beginingNumber, endingNumber = inputs()
     userCountingTrack = processing
     processing(beginingNumber,endingNumber) 
-    print(userCountingTrack)
+    print(userCountingTrack) #guessing i need to incorparate this into "outputs"
     
 
 
