@@ -1,13 +1,22 @@
 """docstring JACKSON DEMPSEY 10/3, redesign of the "loop 2" program, a number counter, using MIPO design (main, input, processing, outputs) """
 
+## The Main part, which executes all the things we've created in the bottom IPO part
+
 def main():
 
+
+
+    #these two lines refrence the variables which the inputs and processing functions "returned" to us below
     beginingNumber, endingNumber = inputs()
     userCountingTrack = processing
-    processing(beginingNumber,endingNumber) 
-    print(userCountingTrack) #guessing i need to incorparate this into "outputs"
-    
 
+    #because we refrenced them, we can now input them like the variables we've done before
+    
+    processing(beginingNumber,endingNumber) 
+    outputs(userCountingTrack) #outputs here is essentially a fancy print statment, since that function only has a print statement inside it
+
+    
+## IPO part, where main gets it's stuff to do
 
 def inputs():
 
@@ -17,6 +26,8 @@ def inputs():
     endingNumber = int(input("enter a whole number greater than 0: "))
 
     return beginingNumber, endingNumber
+
+
 
 def processing(startNumber,endNumber):
     
@@ -36,6 +47,10 @@ def processing(startNumber,endNumber):
 
 
     return startNumber, endNumber, userCountingTrack
+
+def outputs(outputNumber):
+    
+    print(outputNumber)
     
 main()
 
