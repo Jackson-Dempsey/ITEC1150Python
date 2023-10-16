@@ -1,3 +1,5 @@
+"""DOCSTRING Jackson Dempsey - 10/15, book list, takes generates a list of book prices names based on user input, and returns the input back to the user in a print statment"""
+
 def main():  # call functions and save results under key variable names.
     try:  # generic exception handling - turn off during development
         num_books, price_list, name_list = inputs()
