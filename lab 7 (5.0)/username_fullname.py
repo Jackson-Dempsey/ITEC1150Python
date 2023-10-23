@@ -1,3 +1,5 @@
+"""docstring, JACKSON DEMPSEY 10/22/23, username_fullname.py, managing a sudo-database of users using a python dictionary"""
+
 def main():
     try:
         users = {
@@ -16,6 +18,8 @@ def main():
                 view(users)
             elif command == 'add':
                 add(users)
+            elif command == 'edit':
+                edit(users)
             elif command == 'del':
                 delete(users)
             elif command == 'exit':
@@ -31,22 +35,29 @@ def displayUsernames(userDictInput_displayUsernames): #function which will outpu
     
     usernameList_displayUsernames = list(userDictInput_displayUsernames.keys())
     usernameList_displayUsernames.sort() 
-    print(usernameList_displayUsernames,"debug")
+    
+    line = str('Users: ')
+    for username in usernameList_displayUsernames:
+        line += username + ' '
+    print(line)
+
+    
     
     return usernameList_displayUsernames 
 
 
 def display_menu(): #function to print out all the diffrent commmands
     print('COMMAND MENU')
-    print('view - View country name')
-    print('add - Add a country')
-    print('del - Delete a country')
+    print('view - view all users and their coresponding full names')
+    print('add - Add a new user')
+    print('edit - Edit an existing user')
+    print('del - Delete a user')
     print('exit - Exit program')
     print()
 
 def view(userDictInput_view):
 
-    print(displayUsernames(userDictInput_view))
+    displayUsernames(userDictInput_view) # will run this code for every function the user will end up using for refrence
 
     usernameInput_view = str(input("please enter the username you would like to see the full name of:"))
 
@@ -57,7 +68,7 @@ def view(userDictInput_view):
 
 
 def add(userDictInput_add):
-    print(displayUsernames(userDictInput_add))
+    displayUsernames(userDictInput_add)
     usernameInput_add = input("please enter the username you would like to add.")
 
     while usernameInput_add in userDictInput_add :#while loop, to avoid namespace colision between usernames 
@@ -68,27 +79,49 @@ def add(userDictInput_add):
 
     userDictInput_add.update({usernameInput_add:actualName_Input}) #updates the main dictionary with user specified strings, using the .update method
     print(userDictInput_add.get(usernameInput_add), "was added to users.") #uses the .get() method from the inital list in the function
-    
+
+def edit(userDictInput_edit):
+
+    displayUsernames(userDictInput_edit) # will run this code for every function the user will end up using for refrence
+
+    usernameInput_edit = str(input("please enter the username you would like to edit:"))
+
+    if usernameInput_edit in userDictInput_edit:
+
+        usernameCorrection_edit = str(input("please enter the full name you wish to change this username to:"))
+        userDictInput_edit[usernameInput_edit] = usernameCorrection_edit #edits the value portion from the specified key in the dictionary
+
+    else:
+        print("there is no such username to edit in the file")
+
+    print("the full name of the user has been changed to:",usernameCorrection_edit)
+
 
 def delete(userDictInput_delete):
 
-    print(displayUsernames(userDictInput_delete))
+    displayUsernames(userDictInput_delete)
 
     usernameInput_delete = input("please enter the username you would like to delete:")
 
     if usernameInput_delete in userDictInput_delete:
+
         print(userDictInput_delete[usernameInput_delete], "will be deleted, is this ok?") #prints the message for the warning
+
+        userConfirmation_delete = str("") #my guess is this code is probably redundant, but I'm keeping it in because I've gotten errors when commenting it out
+
         userConfirmation_delete = input("enter Y or N:") #if loop for validation for deletion
-        userConfirmation_delete.upper
-        while userConfirmation_view != "Y" or userConfirmation_view != "N":
-            userConfirmation_view = input("enter Y or N:")
+
+        #while userConfirmation_view != "Y" or userConfirmation_view != "N" or userConfirmation_view != "n" or userConfirmation_view != "y": #making sure the user is *actually* saying yes or no
+            #userConfirmation_view = input("enter Y or N:") TODO - fix this, currently results in Unbound Local Error : "UnboundLocalError: local variable 'userConfirmation_view' referenced before assignment"
+            #not fixing yet because this wasn't required for assigment
             
-        if userConfirmation_view == "Y":
-            userDictInput_delete.pop(usernameInput_delete)
+        if userConfirmation_delete == "Y":
+            del userDictInput_delete[usernameInput_delete]  #deleting both key and value from the dictionary using the .pop method
+
         else:
             pass
 
-        print("the user", usernameInput_delete, "has been deleted")
+        print("the user", usernameInput_delete, "has been deleted") #verifcation statement, printing out the username the user wanted deleted
 
     else:
         print("there is no such username to delete in the file")
