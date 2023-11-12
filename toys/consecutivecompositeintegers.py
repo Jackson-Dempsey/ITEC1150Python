@@ -14,7 +14,7 @@ def main ():
     #initalize the list first:
 
 
-    for numbers in range(1,userDesiredNoOfConsecutiveCompositeNumbers+1):
+    for numbers in range(0,userDesiredNoOfConsecutiveCompositeNumbers):
             compositeList.append(numbers)
             print(compositeList)
 
